@@ -1,6 +1,7 @@
 let cart = []
 let modalQt = 0
 let key = 0
+let usuario = []
 //constante para carregar estrutura, limpando o código//constante para carregar estrutura, limpando o codigo
 const c = (el) => document.querySelector(el) //para localizar o primeiro item
 const cs = (el) => document.querySelectorAll(el) //para localizar todos os itens
@@ -143,7 +144,10 @@ c('.menu-closer').addEventListener('click', () => {
 
 c('.cart-finalizar').addEventListener('click', () => {
     cart = []
+    // quando clicar no botao FINALIZAR o array do usuario vai esvaziar e vai dar um refresh na pagina
+    usuario = []
     updateCart()
+    location.reload()
 })
 
 function updateCart() {
@@ -201,3 +205,32 @@ function updateCart() {
         c('aside').style.left = '100vw'
     }
 }
+
+c('.login').addEventListener('click', () => {
+    c('.backgound-form').style.opacity = 0
+    c('.backgound-form').style.display = 'flex'
+    c('form').style.display = 'flex'
+    setTimeout(() => {
+        c('.backgound-form').style.opacity = 1
+    }, 200)
+})
+
+// ADICIONANDO O NOME DO USUARIO NO LUGAR DO SIGN IN
+
+// criei 2 variaveis, uma para pegar o campo do input:text e a outra para adicionar no lugar do sign in. Criei um array chamado USUARIO e passei como vazio. dps defazer tudo aquilo dps de clicar no .form-button, ele vai add no array o "CAMPO" atribuindo um VALUE, dps eu passo a varias ADD q pega o .login e coloco o nome do USUARIO nela.
+
+let campo = document.querySelector("input")
+let add = document.querySelector(".login")
+
+c('.form-button').addEventListener('click', () => {
+
+    c('.backgound-form').style.opacity = 0
+    setTimeout(() => {
+        c('.backgound-form').style.display = 'none'
+
+        c('form').style.display = 'none'
+    }, 500)
+
+    usuario.push(campo.value)
+    add.innerHTML = `${usuario}`
+})
